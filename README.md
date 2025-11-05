@@ -20,31 +20,59 @@ La implementación se basa en la programacion orientada a objetos, donde cada co
 
 ```mermaid
 classDiagram
-    class Component {
-        +get_impedance(frequency: float): complex
-    }
-    class Resistor {
-        +resistance: float
-        +power: float
-        +get_impedance(frequency): complex
-    }
-    class Capacitor {
-        +capacitance: float
-        +voltage_rating: float
-        +get_impedance(frequency): complex
-    }
-    class Inductor {
-        +inductance: float
-        +current_rating: float
-        +get_impedance(frequency): complex
-    }
-    class RCCircuit { +simulate() }
-    class RLCircuit { +simulate() }
-    class RLCCircuit { +simulate() }
+direction TB
 
-    Resistor ..|> Component
-    Capacitor ..|> Component
-    Inductor ..|> Component
+    class Component {
+        <<abstract>>
+        + name: str
+        + value: float
+        + get_impedance(frequency: float): complex
+    }
+
+    class Resistor {
+        + resistance: float
+        + power_rating: float
+        + get_impedance(frequency: float): complex
+    }
+
+    class Capacitor {
+        + capacitance: float
+        + voltage_rating: float
+        + get_impedance(frequency: float): complex
+    }
+
+    class Inductor {
+        + inductance: float
+        + current_rating: float
+        + get_impedance(frequency: float): complex
+    }
+
+    class Circuit {
+        + components: list[Component]
+        + V_in: float
+        + simulate()
+        + plot_response()
+    }
+
+    class RCCircuit {
+        + simulate()
+    }
+
+    class RLCircuit {
+        + simulate()
+    }
+
+    class RLCCircuit {
+        + simulate()
+    }
+
+    Component <|-- Resistor
+    Component <|-- Capacitor
+    Component <|-- Inductor
+    Circuit <|-- RCCircuit
+    Circuit <|-- RLCircuit
+    Circuit <|-- RLCCircuit
+
 ```
 ---
 
