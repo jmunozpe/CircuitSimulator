@@ -16,7 +16,7 @@ La implementación se basa en la programacion orientada a objetos, donde cada co
 - Graficar la respuesta temporal de cada componente.
 ---
 
-## 🧠 Diagrama de clases
+##  Diagrama de clases
 
 ```mermaid
 classDiagram
@@ -48,7 +48,7 @@ classDiagram
 ```
 ---
 
-## ⚙️ Solución preliminar
+##  Solución preliminar
 
 Para demostrar el funcionamiento básico del simulador, se creó un código en Python que implementa las clases de los componentes eléctricos (R, C, L) y permite simular los circuitos **RC**, **RL** y **RLC** simples con una fuente DC tipo escalón.  
 Este código aplica principios de POO y genera las gráficas de tensión y corriente de cada componente.
@@ -56,7 +56,7 @@ Este código aplica principios de POO y genera las gráficas de tensión y corri
 ### Código preliminar (ejecutable)
 
 ```python
-# prelim_sim.py — Solución preliminar del avance 15%
+# prelim_sim.py 
 # Librerías necesarias: numpy, scipy, matplotlib
 from dataclasses import dataclass
 import numpy as np
