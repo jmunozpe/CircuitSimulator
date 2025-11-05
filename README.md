@@ -76,59 +76,72 @@ direction TB
 ```
 ---
 
-##  Solución preliminar
+## como funciona?
 
-Para demostrar el funcionamiento básico del simulador, se creó un código en Python que implementa las clases de los componentes eléctricos (R, C, L) y permite simular los circuitos **RC**, **RL** y **RLC** simples con una fuente DC tipo escalón.  
-Este código aplica principios de POO y genera las gráficas de tensión y corriente de cada componente.
+1. Clase abstracta 
 
-### Código preliminar (ejecutable)
+Es la clase base (abstracta) que define el comportamiento general de cualquier componente eléctrico.
 
-```python
-# prelim_sim.py 
-# Librerías necesarias: numpy, scipy, matplotlib
-from dataclasses import dataclass
-import numpy as np
-from scipy.integrate import solve_ivp
-import matplotlib.pyplot as plt
+Contiene atributos comunes:
 
-@dataclass
-class Resistor:
-    resistance: float
-    def impedance(self, f: float = 0): return complex(self.resistance, 0)
+name: nombre del componente 
 
-@dataclass
-class Capacitor:
-    capacitance: float
-    def impedance(self, f: float): return complex(float('inf'), 0) if f == 0 else 1/(1j*2*np.pi*f*self.capacitance)
+value: valor físico 
 
-@dataclass
-class Inductor:
-    inductance: float
-    def impedance(self, f: float): return 1j*2*np.pi*f*self.inductance
+Tiene un método abstracto get_impedance(frequency: float) que debe ser implementado por cada componente, ya que la impedancia depende del tipo (R, L o C).
 
-# Circuito RC
-def simulate_RC(R, C, V_in, t_end=0.02):
-    def f(t, vC): return (V_in - vC[0]) / (R * C)
-    t = np.linspace(0, t_end, 2001)
-    sol = solve_ivp(lambda t, y: [f(t, y)], (0, t_end), [0.0], t_eval=t)
-    vC = sol.y[0]
-    i = (V_in - vC) / R
-    plt.plot(t, vC, label='vC(t)')
-    plt.plot(t, i, label='i(t)')
-    plt.title('Respuesta transitoria RC')
-    plt.xlabel('Tiempo [s]')
-    plt.ylabel('Magnitud (V o A)')
-    plt.legend(); plt.grid(); plt.show()
+2. Clases derivadas de Component
 
-# Ejemplo de uso:
-simulate_RC(R=1000, C=1e-6, V_in=5)
-```
+Cada una hereda de Component y define su propio comportamiento físico.
 
-## PREGUNTAS
-1.¿Está bien la forma en la que se usan las clases Resistor, Capacitor e Inductor o debería agruparlas bajo una clase base como Componente?
+ Resistor
 
-2.¿Conviene implementar herencia entre los diferentes componentes eléctricos o mantener las clases separadas?
+Atributos:
 
-3.¿Es bueno que el circuito completo (por ejemplo, CircuitoRC o CircuitoRLC) sea una clase con sus propios métodos de simulación?
+resistance: valor de la resistencia (Ω).
 
-4.¿solve_ivp es la mejor herramienta para resolver ecuaciones diferenciales o hay alguna quer puede ser mejor?
+power_rating: potencia máxima soportada (W).
+
+Método:
+
+get_impedance(frequency): devuelve una impedancia real constante, Z = R.
+
+Capacitor
+
+Atributos:
+
+capacitance: valor del condensador (F).
+
+voltage_rating: tensión máxima (V).
+
+Método:
+
+get_impedance(frequency): devuelve Z = 1 / (j·2π·f·C), una impedancia inversamente proporcional a la frecuencia.
+
+Inductor
+
+Atributos:
+
+inductance: valor de la inductancia (H).
+
+current_rating: corriente máxima (A).
+
+Método:
+
+get_impedance(frequency): devuelve Z = j·2π·f·L, una impedancia directamente proporcional a la frecuencia.
+
+3. Clase Circuit
+
+Representa un circuito genérico, compuesto por una lista de objetos Component.
+
+Atributos:
+
+components: lista con resistores, capacitores e inductores.
+
+V_in: tensión de entrada 
+
+Métodos principales:
+
+simulate(): ejecuta la simulación del circuito según las ecuaciones diferenciales del sistema.
+
+plot_response(): genera las gráficas de tensión y corriente en el tiempo usando matplotlib.
