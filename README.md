@@ -2,6 +2,8 @@
 Simulador de circuitos RC, RL y RLC en Python 
 
 **Alternativa 4 – Simulación de circuitos RC, RL y RLC simples con fuente DC**
+<img width="1536" height="1024" alt="circuit simulator logo" src="https://github.com/user-attachments/assets/5b8f8beb-b4ef-4917-9e38-d663c794d446" />
+
 
 El proyecto consiste en desarrollar una aplicación en **Python** que simule circuitos **RC**, **RL** y **RLC** simples con una **fuente de tensión DC.  
 El programa calculará y mostrará las **gráficas de tensión y corriente** en cada componente del circuito.
