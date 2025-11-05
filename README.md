@@ -78,7 +78,7 @@ direction TB
 
 ## como funciona?
 
-## 1. Clase abstracta ##
+## 1. Clase abstracta.
 
 Es la clase base (abstracta) que define el comportamiento general de cualquier componente eléctrico.
 
@@ -90,7 +90,7 @@ value: valor físico
 
 Tiene un método abstracto get_impedance(frequency: float) que debe ser implementado por cada componente, ya que la impedancia depende del tipo (R, L o C).
 
-## 2. Clases derivadas de Component##
+## 2. Clases derivadas de Component.
 
 Cada una hereda de Component y define su propio comportamiento físico.
 
@@ -130,7 +130,7 @@ Método:
 
 get_impedance(frequency): devuelve Z = j·2π·f·L, una impedancia directamente proporcional a la frecuencia.
 
-## 3. Clase Circuit##
+## 3. Clase Circuit.
 
 Representa un circuito genérico, compuesto por una lista de objetos Component.
 
