@@ -76,7 +76,7 @@ direction TB
 ```
 ---
 
-## como funciona?
+## Como funciona?
 
 ## 1. Clase abstracta.
 
