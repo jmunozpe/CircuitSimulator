@@ -98,6 +98,9 @@ simulate_RC(R=1000, C=1e-6, V_in=5)
 
 ## PREGUNTAS
 1.¿Está bien la forma en la que se usan las clases Resistor, Capacitor e Inductor o debería agruparlas bajo una clase base como Componente?
+
 2.¿Conviene implementar herencia entre los diferentes componentes eléctricos o mantener las clases separadas?
+
 3.¿Es bueno que el circuito completo (por ejemplo, CircuitoRC o CircuitoRLC) sea una clase con sus propios métodos de simulación?
+
 4.¿solve_ivp es la mejor herramienta para resolver ecuaciones diferenciales o hay alguna quer puede ser mejor?
