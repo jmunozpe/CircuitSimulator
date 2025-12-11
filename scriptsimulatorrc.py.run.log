@@ -1,7 +1,0 @@
-STDOUT:
-Imagen guardada en: C:\Users\crist\OneDrive\Escritorio\POO\CircuitSimulator\rc_step.png
-
-
-STDERR:
-C:\Users\crist\OneDrive\Escritorio\POO\CircuitSimulator\scriptsimulatorrc.py:66: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
-  plt.show()
