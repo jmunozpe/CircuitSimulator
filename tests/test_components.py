@@ -9,12 +9,10 @@ def test_resistor_impedance():
 
 def test_capacitor_impedance_dc_infinite():
     C = Capacitor("C", 1e-6)
-    z = C.get_impedance(0)
-    assert math.isinf(z.real)
+    assert math.isinf(C.get_impedance(0).real)
 
 
 def test_inductor_impedance_zero_at_dc():
     L = Inductor("L", 1e-3)
-    z = L.get_impedance(0)
-    assert abs(z) == 0.0
+    assert abs(L.get_impedance(0)) == 0.0
 
