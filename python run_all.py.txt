@@ -1,0 +1,32 @@
+import sys
+import subprocess
+from pathlib import Path
+
+root = Path(__file__).resolve().parent
+scripts = ["plot_rl.py", "plot_rc.py", "plot_rlc.py", "plot_rl_auto.py"]
+
+for name in scripts:
+    path = root / name
+    if not path.exists():
+        print(f"{name}: no existe")
+        continue
+    print(f"Ejecutando {name} ...")
+    log = root / f"{name}.run.log"
+    # Ejecutar en un proceso separado; forzar backend 'Agg' para no bloquear con ventanas
+    env = dict(**dict(subprocess.os.environ))
+    env["MPLBACKEND"] = "Agg"
+    try:
+        res = subprocess.run([sys.executable, str(path)], capture_output=True, text=True, env=env, timeout=300)
+        with open(log, "w", encoding="utf-8") as f:
+            f.write("STDOUT:\n")
+            f.write(res.stdout)
+            f.write("\n\nSTDERR:\n")
+            f.write(res.stderr)
+        if res.returncode == 0:
+            print(f"{name}: OK -> salida guardada en {log}")
+        else:
+            print(f"{name}: FALLÓ (código {res.returncode}) -> ver {log}")
+    except Exception as e:
+        with open(log, "w", encoding="utf-8") as f:
+            f.write(f"Exception running {name}:\n{e}\n")
+        print(f"{name}: EXCEPCIÓN -> ver {log}")

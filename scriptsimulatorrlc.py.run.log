@@ -1,0 +1,7 @@
+STDOUT:
+Imagen guardada en: C:\Users\crist\OneDrive\Escritorio\POO\CircuitSimulator\rlc_step.png
+
+
+STDERR:
+C:\Users\crist\OneDrive\Escritorio\POO\CircuitSimulator\scriptsimulatorrlc.py:66: UserWarning: FigureCanvasAgg is non-interactive, and thus cannot be shown
+  plt.show()
