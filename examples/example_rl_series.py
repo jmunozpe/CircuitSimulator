@@ -5,17 +5,12 @@ from circuit_simulator.plotting import plot_rl_series
 import matplotlib.pyplot as plt
 
 
-def main():
-    source = DCSupply(5.0)  # 5 V
-    R = Resistor("R1", 100)      # 100 Ω
-    L = Inductor("L1", 10e-3)    # 10 mH
+source = DCSupply(5.0)
+R = Resistor("R1", 100)
+L = Inductor("L1", 10e-3)
 
-    circuit = RLSeriesCircuit(source, R, L)
-    result = circuit.simulate(t_end=0.1, dt=1e-5)
+circuit = RLSeriesCircuit(source, R, L)
+result = circuit.simulate(t_end=0.1, dt=1e-5)
 
-    plot_rl_series(result)
-    plt.show()
-
-
-if __name__ == "__main__":
-    main()
+plot_rl_series(result)
+plt.show()
