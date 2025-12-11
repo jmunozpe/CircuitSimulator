@@ -17,6 +17,102 @@ La implementación se basa en la programacion orientada a objetos, donde cada co
 ---
 
 ##  Diagrama de Clases
+## Diagrama de Clases (UML)
+
+```mermaid
+classDiagram
+    direction LR
+
+    class Component {
+        <<abstract>>
+        +name: str
+        +value: float
+        +get_impedance(frequency: float) complex
+    }
+
+    class Resistor {
+        +power_rating: float?
+        +resistance: float
+        +get_impedance(frequency) complex
+    }
+
+    class Capacitor {
+        +voltage_rating: float?
+        +capacitance: float
+        +get_impedance(frequency) complex
+    }
+
+    class Inductor {
+        +current_rating: float?
+        +inductance: float
+        +get_impedance(frequency) complex
+    }
+
+    class DCSupply {
+        +voltage: float
+        +value(t: ndarray) ndarray
+    }
+
+    class Circuit {
+        <<abstract>>
+        +source: DCSupply
+        +simulate(t_end: float, dt: float) Dict[str, ndarray]
+    }
+
+    class RCSeriesCircuit {
+        +R: Resistor
+        +C: Capacitor
+        +simulate(t_end, dt)
+    }
+
+    class RLSeriesCircuit {
+        +R: Resistor
+        +L: Inductor
+        +simulate(t_end, dt)
+    }
+
+    class RLCSeriesCircuit {
+        +R: Resistor
+        +L: Inductor
+        +C: Capacitor
+        +simulate(t_end, dt)
+    }
+
+    class Solver {
+        <<function>>
+        +euler_solver(f, y0, t_end, dt)
+    }
+
+    class Plotting {
+        <<module>>
+        +plot_rc_series(result)
+        +plot_rl_series(result)
+        +plot_rlc_series(result)
+        +plot_resistive(result)
+    }
+
+    Component <|-- Resistor
+    Component <|-- Capacitor
+    Component <|-- Inductor
+
+    Circuit <|-- RCSeriesCircuit
+    Circuit <|-- RLSeriesCircuit
+    Circuit <|-- RLCSeriesCircuit
+
+    Circuit --> DCSupply : usa
+    RCSeriesCircuit --> Resistor : tiene
+    RCSeriesCircuit --> Capacitor : tiene
+    RLSeriesCircuit --> Resistor : tiene
+    RLSeriesCircuit --> Inductor : tiene
+    RLCSeriesCircuit --> Resistor : tiene
+    RLCSeriesCircuit --> Inductor : tiene
+    RLCSeriesCircuit --> Capacitor : tiene
+
+    Circuit ..> Solver : resuelve ODE
+    Circuit ..> Plotting : resultados para gráficas
+
+```
+
 
 ### Arquitectura del Proyecto
 
