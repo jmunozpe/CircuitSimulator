@@ -93,7 +93,7 @@ Los circuitos RLC se utilizan en radios, telecomunicaciones, filtros resonantes 
   - Simulación numérica  
 - Permite modificar parámetros fácilmente para estudiar el comportamiento dinámico.
 
-## 📖 Explicación Detallada del Código
+## Explicación Detallada del Código
 
 ### 1. Componentes Eléctricos (`components.py`)
 
@@ -408,7 +408,7 @@ plt.show()
 
 ---
 
-### 🎯 Principios de Diseño Aplicados
+### Principios de Diseño Aplicados
 
 1. **Abstracción**: Clases abstractas `Component` y `Circuit` definen interfaces comunes
 2. **Herencia**: Componentes y circuitos heredan de sus clases base
@@ -418,7 +418,7 @@ plt.show()
 
 ---
 
-### 🔬 Fundamentos Matemáticos
+### Fundamentos Matemáticos
 
 #### Constantes de Tiempo
 
