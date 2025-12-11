@@ -115,72 +115,54 @@ Los circuitos RLC se utilizan en radios, telecomunicaciones, filtros resonantes 
   - Simulación numérica  
 - Permite modificar parámetros fácilmente para estudiar el comportamiento dinámico.
 
-## Como funciona?
+## Cómo funciona el código del simulador
 
-## 1. Clase abstracta.
+El proyecto está dividido en módulos pequeños y claros, cada uno encargado de una parte específica del simulador. Esto hace que el código sea fácil de mantener, extender y entender.
 
-Es la clase base (abstracta) que define el comportamiento general de cualquier componente eléctrico.
 
-Contiene atributos comunes:
+### `components.py` — Componentes eléctricos
+Define las clases básicas del simulador:
+- Resistor  
+- Capacitor  
+- Inductor  
 
-name: nombre del componente 
+Cada componente almacena su valor (R, C o L) y puede calcular su impedancia según la frecuencia.  
+Estos objetos se usan para construir los circuitos.
 
-value: valor físico 
 
-Tiene un método abstracto get_impedance(frequency: float) que debe ser implementado por cada componente, ya que la impedancia depende del tipo (R, L o C).
+### `circuits.py` — Modelos de circuitos
+Contiene las clases que representan los circuitos en serie:
+- `RCSeriesCircuit`  
+- `RLSeriesCircuit`  
+- `RLCSeriesCircuit`  
 
-## 2. Clases derivadas de Component.
+Cada clase implementa un método `simulate()` que:
+1. Define la ecuación diferencial del circuito.  
+2. Llama al solver numérico.  
+3. Devuelve tiempo, corriente y voltajes en cada componente.
 
-Cada una hereda de Component y define su propio comportamiento físico.
 
- Resistor
+### `solver.py` — Método numérico
+Implementa un solver de Euler simple.  
+Recibe:
+- La función diferencial del circuito  
+- El estado inicial  
+- El tiempo total y el paso `dt`  
 
-Atributos:
+Devuelve:
+- Vector de tiempo  
+- Evolución de las variables del circuito  
 
-resistance: valor de la resistencia (Ω).
+Es el motor matemático del simulador.
 
-power_rating: potencia máxima soportada (W).
 
-Método:
+### `sources.py` — Fuente de voltaje
+Define la clase `DCSupply`, que representa una fuente de voltaje constante.  
+Entrega un vector con el mismo voltaje para toda la simulación.
 
-get_impedance(frequency): devuelve una impedancia real constante, Z = R.
+### `plotting.py` — Gráficas
+Incluye funciones para graficar:
+- Voltajes en cada componente  
+- Corriente del circuito  
 
-Capacitor
-
-Atributos:
-
-capacitance: valor del condensador (F).
-
-voltage_rating: tensión máxima (V).
-
-Método:
-
-get_impedance(frequency): devuelve Z = 1 / (j·2π·f·C), una impedancia inversamente proporcional a la frecuencia.
-
-Inductor
-
-Atributos:
-
-inductance: valor de la inductancia (H).
-
-current_rating: corriente máxima (A).
-
-Método:
-
-get_impedance(frequency): devuelve Z = j·2π·f·L, una impedancia directamente proporcional a la frecuencia.
-
-## 3. Clase Circuit.
-
-Representa un circuito genérico, compuesto por una lista de objetos Component.
-
-Atributos:
-
-components: lista con resistores, capacitores e inductores.
-
-V_in: tensión de entrada 
-
-Métodos principales:
-
-simulate(): ejecuta la simulación del circuito según las ecuaciones diferenciales del sistema.
-
-plot_response(): genera las gráficas de tensión y corriente en el tiempo usando matplotlib.
+Cada tipo de circuito tiene su función dedicada (`plot_rc_series`, `plot_rl_series`, etc.).
