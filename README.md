@@ -105,7 +105,15 @@ El circuito RLC integra los tres elementos: resistencia, inductor y capacitor.
 Es el más completo de los tres, ya que puede presentar comportamientos amortiguados u oscilatorios dependiendo de los valores de sus componentes.  
 Los circuitos RLC se utilizan en radios, telecomunicaciones, filtros resonantes y sistemas de sintonización de frecuencia.
 
+## ¿Qué hace este simulador?
 
+- Modela componentes eléctricos como **clases independientes**.  
+- Construye circuitos combinando objetos.  
+- Resuelve ecuaciones diferenciales de **primer orden** (RC, RL) y **segundo orden** (RLC).  
+- Genera gráficas comparando:
+  - Solución analítica  
+  - Simulación numérica  
+- Permite modificar parámetros fácilmente para estudiar el comportamiento dinámico.
 
 ## Como funciona?
 
