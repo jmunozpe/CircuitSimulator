@@ -75,6 +75,37 @@ direction TB
 
 ```
 ---
+## ¿Qué es un circuito eléctrico?
+Un **circuito eléctrico** es una conexión de componentes que permiten el flujo de corriente para transformar, almacenar o controlar energía.  
+Puede incluir resistencias, capacitores, inductores y fuentes, y su comportamiento depende de cómo estos elementos interactúan en el tiempo.
+
+
+## Tipos de circuitos incluidos en este simulador
+
+Este proyecto trabaja con tres configuraciones clásicas de circuitos eléctricos: **RC**, **RL** y **RLC**. Cada uno combina componentes que almacenan o disipan energía, generando comportamientos dinámicos distintos. A continuación se explica brevemente qué hace cada uno.
+
+### Circuito RC (Resistencia – Capacitor)
+
+Un circuito RC está formado por una resistencia y un capacitor conectados entre sí.  
+El capacitor almacena energía en forma de campo eléctrico y se opone a cambios bruscos de voltaje.  
+Como resultado, el voltaje en el capacitor no cambia instantáneamente, sino que evoluciona de manera suave y progresiva.  
+Este tipo de circuito se usa en temporizadores, filtros y sistemas de suavizado de señales.
+
+### Circuito RL (Resistencia – Inductor)
+
+Un circuito RL combina una resistencia con un inductor (bobina).  
+El inductor almacena energía en un campo magnético y se opone a cambios bruscos de corriente.  
+Por eso, la corriente en un circuito RL no sube de golpe, sino que aumenta gradualmente hasta estabilizarse.  
+Estos circuitos aparecen en motores, electromagnetismo, electrónica de potencia y filtros pasa‑altos.
+
+
+### Circuito RLC (Resistencia – Inductor – Capacitor)
+
+El circuito RLC integra los tres elementos: resistencia, inductor y capacitor.  
+Es el más completo de los tres, ya que puede presentar comportamientos amortiguados u oscilatorios dependiendo de los valores de sus componentes.  
+Los circuitos RLC se utilizan en radios, telecomunicaciones, filtros resonantes y sistemas de sintonización de frecuencia.
+
+
 
 ## Como funciona?
 
