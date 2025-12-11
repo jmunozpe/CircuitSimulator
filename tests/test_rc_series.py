@@ -1,5 +1,4 @@
 import numpy as np
-
 from circuit_simulator.components import Resistor, Capacitor
 from circuit_simulator.sources import DCSupply
 from circuit_simulator.circuits import RCSeriesCircuit
@@ -19,11 +18,12 @@ def test_rc_series_step_response_close_to_analytic():
     result = circuit.simulate(t_end=5 * tau, dt=1e-4)
 
     t = result["t"]
-    v_c_num = result["v_C"]
-    i_num = result["i"]
+    v_c = result["v_C"]
+    i = result["i"]
 
     v_c_exact = V * (1 - np.exp(-t / tau))
     i_exact = (V / R_value) * np.exp(-t / tau)
 
-    assert np.allclose(v_c_num, v_c_exact, atol=1e-2)
-    assert np.allclose(i_num, i_exact, atol=1e-4)
+    assert np.allclose(v_c, v_c_exact, atol=1e-2)
+    assert np.allclose(i, i_exact, atol=1e-4)
+
